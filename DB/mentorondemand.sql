@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2019 at 10:46 AM
+-- Generation Time: Jun 08, 2019 at 05:22 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -58,14 +58,43 @@ CREATE TABLE `mentorcalendar` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `mentordetails`
+--
+
+CREATE TABLE `mentordetails` (
+  `mentor_id` int(11) NOT NULL,
+  `expertise` varchar(255) NOT NULL,
+  `experience` float NOT NULL,
+  `rating` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `mentordetails`
+--
+
+INSERT INTO `mentordetails` (`mentor_id`, `expertise`, `experience`, `rating`) VALUES
+(1, 'Full Stack Developer', 11, 5);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `mentorskills`
 --
 
 CREATE TABLE `mentorskills` (
   `id` int(11) NOT NULL,
   `mentor_id` int(11) NOT NULL,
-  `tech_id` int(11) NOT NULL
+  `tech_id` int(11) NOT NULL,
+  `experience` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `mentorskills`
+--
+
+INSERT INTO `mentorskills` (`id`, `mentor_id`, `tech_id`, `experience`) VALUES
+(1, 1, 1, 10),
+(2, 1, 2, 5);
 
 -- --------------------------------------------------------
 
@@ -123,6 +152,14 @@ CREATE TABLE `technologies` (
   `name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `technologies`
+--
+
+INSERT INTO `technologies` (`id`, `name`) VALUES
+(1, 'Core Java'),
+(2, 'Spring');
+
 -- --------------------------------------------------------
 
 --
@@ -131,12 +168,24 @@ CREATE TABLE `technologies` (
 
 CREATE TABLE `trainings` (
   `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `tech_id` int(11) NOT NULL,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
-  `trainer_id` int(11) NOT NULL,
-  `status` varchar(255) NOT NULL
+  `mentor_id` int(11) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `last_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `trainings`
+--
+
+INSERT INTO `trainings` (`id`, `name`, `tech_id`, `start_date`, `end_date`, `mentor_id`, `status`, `email`, `last_date`) VALUES
+(1, 'Spring Basics', 2, '2019-06-03', '2019-06-28', 1, 'NOT STARTED', NULL, NULL),
+(2, 'Java Basics', 1, '2019-06-03', '2019-06-28', 1, 'NOT STARTED', NULL, NULL),
+(3, 'Spring Basics', 2, '2019-06-10', '2019-06-28', 1, 'NOT STARTED', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -191,6 +240,12 @@ ALTER TABLE `mentorcalendar`
   ADD KEY `mentorcalendar_ibfk_1` (`mentor_id`);
 
 --
+-- Indexes for table `mentordetails`
+--
+ALTER TABLE `mentordetails`
+  ADD PRIMARY KEY (`mentor_id`);
+
+--
 -- Indexes for table `mentorskills`
 --
 ALTER TABLE `mentorskills`
@@ -231,7 +286,7 @@ ALTER TABLE `technologies`
 ALTER TABLE `trainings`
   ADD PRIMARY KEY (`id`),
   ADD KEY `tech_id` (`tech_id`),
-  ADD KEY `trainings_ibfk_2` (`trainer_id`);
+  ADD KEY `trainings_ibfk_2` (`mentor_id`);
 
 --
 -- Indexes for table `user`
@@ -260,7 +315,7 @@ ALTER TABLE `mentorcalendar`
 -- AUTO_INCREMENT for table `mentorskills`
 --
 ALTER TABLE `mentorskills`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `payments`
@@ -278,13 +333,13 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `technologies`
 --
 ALTER TABLE `technologies`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `trainings`
 --
 ALTER TABLE `trainings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -302,6 +357,12 @@ ALTER TABLE `user`
 ALTER TABLE `mentorcalendar`
   ADD CONSTRAINT `mentorcalendar_ibfk_1` FOREIGN KEY (`mentor_id`) REFERENCES `user` (`id`),
   ADD CONSTRAINT `mentorcalendar_ibfk_2` FOREIGN KEY (`training_id`) REFERENCES `trainings` (`id`);
+
+--
+-- Constraints for table `mentordetails`
+--
+ALTER TABLE `mentordetails`
+  ADD CONSTRAINT `mentordetails_ibfk_1` FOREIGN KEY (`mentor_id`) REFERENCES `user` (`id`);
 
 --
 -- Constraints for table `mentorskills`
@@ -323,7 +384,7 @@ ALTER TABLE `payments`
 --
 ALTER TABLE `trainings`
   ADD CONSTRAINT `trainings_ibfk_1` FOREIGN KEY (`tech_id`) REFERENCES `technologies` (`id`),
-  ADD CONSTRAINT `trainings_ibfk_2` FOREIGN KEY (`trainer_id`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `trainings_ibfk_2` FOREIGN KEY (`mentor_id`) REFERENCES `user` (`id`);
 
 --
 -- Constraints for table `user_role`
