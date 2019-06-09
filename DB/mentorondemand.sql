@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2019 at 05:22 PM
+-- Generation Time: Jun 09, 2019 at 12:23 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -37,8 +37,8 @@ CREATE TABLE `hibernate_sequence` (
 --
 
 INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-(2),
-(2);
+(3),
+(3);
 
 -- --------------------------------------------------------
 
@@ -73,7 +73,8 @@ CREATE TABLE `mentordetails` (
 --
 
 INSERT INTO `mentordetails` (`mentor_id`, `expertise`, `experience`, `rating`) VALUES
-(1, 'Full Stack Developer', 11, 5);
+(1, 'Full Stack Developer', 11, 5),
+(2, 'AWS Developer', 10, 5);
 
 -- --------------------------------------------------------
 
@@ -94,7 +95,8 @@ CREATE TABLE `mentorskills` (
 
 INSERT INTO `mentorskills` (`id`, `mentor_id`, `tech_id`, `experience`) VALUES
 (1, 1, 1, 10),
-(2, 1, 2, 5);
+(2, 1, 2, 5),
+(3, 2, 1, 5);
 
 -- --------------------------------------------------------
 
@@ -199,15 +201,20 @@ CREATE TABLE `user` (
   `lastname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `active` int(11) DEFAULT NULL
+  `active` int(11) DEFAULT NULL,
+  `expertise` varchar(255) NOT NULL,
+  `experience` float NOT NULL,
+  `rating` float NOT NULL,
+  `ismentor` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `firstname`, `lastname`, `email`, `password`, `active`) VALUES
-(1, 'Sujit', 'Kirve', 'sujitkirve@gmail.com', '$2a$10$RLvEeUb1FDGLGw8oJfio8u4I6tz9sdZJeZLd7iw15YOSC2P5S7tFW', 1);
+INSERT INTO `user` (`id`, `firstname`, `lastname`, `email`, `password`, `active`, `expertise`, `experience`, `rating`, `ismentor`) VALUES
+(1, 'Sujit', 'Kirve', 'sujitkirve@gmail.com', '$2a$10$RLvEeUb1FDGLGw8oJfio8u4I6tz9sdZJeZLd7iw15YOSC2P5S7tFW', 1, '', 0, 0, 0),
+(2, 'Sumit', 'Kirve', 'sumitkirve@gmail.com', '$2a$10$VcoPnJ.JJMbZBZTAh6wGS.C2KAFP4buS.FM.MldI3Dzyb2DQuWr0e', 1, '', 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -225,7 +232,8 @@ CREATE TABLE `user_role` (
 --
 
 INSERT INTO `user_role` (`user_id`, `role_id`) VALUES
-(1, 1);
+(1, 1),
+(2, 1);
 
 --
 -- Indexes for dumped tables
@@ -315,7 +323,7 @@ ALTER TABLE `mentorcalendar`
 -- AUTO_INCREMENT for table `mentorskills`
 --
 ALTER TABLE `mentorskills`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `payments`
@@ -345,7 +353,7 @@ ALTER TABLE `trainings`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

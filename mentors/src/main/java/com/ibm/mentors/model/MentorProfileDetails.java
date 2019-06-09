@@ -7,7 +7,7 @@ public class MentorProfileDetails {
 	String mentorId;
 	String mentorName;
 	String mentorEmail;
-	List<MentorSkills> mentorSkills;
+	List<MentorSkillsResponse> mentorSkills;
 	String expertise;
 	Double yearOfExp;
 
@@ -57,21 +57,6 @@ public class MentorProfileDetails {
 	}
 
 	/**
-	 * @return the mentorSkills
-	 */
-	public List<MentorSkills> getMentorSkills() {
-		return mentorSkills;
-	}
-
-	/**
-	 * @param mentorSkills
-	 *            the mentorSkills to set
-	 */
-	public void setMentorSkills(List<MentorSkills> mentorSkills) {
-		this.mentorSkills = mentorSkills;
-	}
-
-	/**
 	 * @return the expertise
 	 */
 	public String getExpertise() {
@@ -101,9 +86,22 @@ public class MentorProfileDetails {
 		this.yearOfExp = yearOfExp;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
+	 * @return the mentorSkills
+	 */
+	public List<MentorSkillsResponse> getMentorSkills() {
+		return mentorSkills;
+	}
+
+	/**
+	 * @param mentorSkills
+	 *            the mentorSkills to set
+	 */
+	public void setMentorSkills(List<MentorSkillsResponse> mentorSkills) {
+		this.mentorSkills = mentorSkills;
+	}
+
+	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
