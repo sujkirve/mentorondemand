@@ -1,11 +1,12 @@
 package com.ibm.users.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class ErrorResponse {
+public class Response {
 
 	String description;
-	List<Error>	 errors;
+	List<Error>	 errors= new ArrayList<>();
 	/**
 	 * @return the description
 	 */

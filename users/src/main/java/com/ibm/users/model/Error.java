@@ -3,6 +3,15 @@ package com.ibm.users.model;
 public class Error {
 	String code;
 	String message;
+	
+	public Error() {
+		
+	}
+	public Error(String code, String message) {
+		super();
+		this.code = code;
+		this.message = message;
+	}
 	/**
 	 * @return the code
 	 */

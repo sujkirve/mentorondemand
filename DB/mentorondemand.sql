@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 09, 2019 at 12:23 PM
+-- Generation Time: Jun 09, 2019 at 04:24 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -37,8 +37,8 @@ CREATE TABLE `hibernate_sequence` (
 --
 
 INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-(3),
-(3);
+(4),
+(4);
 
 -- --------------------------------------------------------
 
@@ -202,19 +202,17 @@ CREATE TABLE `user` (
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `active` int(11) DEFAULT NULL,
-  `expertise` varchar(255) NOT NULL,
-  `experience` float NOT NULL,
-  `rating` float NOT NULL,
-  `ismentor` tinyint(4) NOT NULL
+  `is_mentor` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `firstname`, `lastname`, `email`, `password`, `active`, `expertise`, `experience`, `rating`, `ismentor`) VALUES
-(1, 'Sujit', 'Kirve', 'sujitkirve@gmail.com', '$2a$10$RLvEeUb1FDGLGw8oJfio8u4I6tz9sdZJeZLd7iw15YOSC2P5S7tFW', 1, '', 0, 0, 0),
-(2, 'Sumit', 'Kirve', 'sumitkirve@gmail.com', '$2a$10$VcoPnJ.JJMbZBZTAh6wGS.C2KAFP4buS.FM.MldI3Dzyb2DQuWr0e', 1, '', 0, 0, 0);
+INSERT INTO `user` (`id`, `firstname`, `lastname`, `email`, `password`, `active`, `is_mentor`) VALUES
+(1, 'Sujit', 'Kirve', 'sujitkirve@gmail.com', '$2a$10$RLvEeUb1FDGLGw8oJfio8u4I6tz9sdZJeZLd7iw15YOSC2P5S7tFW', 1, 1),
+(2, 'Sumit', 'Kirve', 'sumitkirve@gmail.com', '$2a$10$VcoPnJ.JJMbZBZTAh6wGS.C2KAFP4buS.FM.MldI3Dzyb2DQuWr0e', 1, 1),
+(3, 'Sunil', 'Kirve', 'sunilkirve@gmail.com', '$2a$10$ma40RVjm5r9ia4BAXOH5juBsNCD4hSUI2dWIs/WFH4B3zETtrI.WS', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -233,7 +231,8 @@ CREATE TABLE `user_role` (
 
 INSERT INTO `user_role` (`user_id`, `role_id`) VALUES
 (1, 1),
-(2, 1);
+(2, 1),
+(3, 1);
 
 --
 -- Indexes for dumped tables
@@ -353,7 +352,7 @@ ALTER TABLE `trainings`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables

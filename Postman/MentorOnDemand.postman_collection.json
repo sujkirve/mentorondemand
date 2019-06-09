@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "users",
+			"name": "users-signup",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -19,16 +19,47 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"email\":\"sujitkirve@gmail.com\",\n\t\"firstname\":\"Sujit\",\n\t\"lastname\":\"Kirve\",\n\t\"password\":\"abc\"\n\t\n}"
+					"raw": "{\n\t\"email\":\"sunilkirve@gmail.com\",\n\t\"firstname\":\"Sunil\",\n\t\"lastname\":\"Kirve\",\n\t\"password\":\"abc\"\n\t\n}"
 				},
 				"url": {
-					"raw": "localhost:8080/signup",
+					"raw": "localhost:8081/users/signup",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8081",
 					"path": [
+						"users",
 						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "users-login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"sumitkirve@gmail.com\",\n\t\"password\":\"abc\"\n\t\n}"
+				},
+				"url": {
+					"raw": "localhost:8081/users/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"users",
+						"login"
 					]
 				}
 			},
@@ -126,14 +157,14 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"technologies\":[2]\n}"
+					"raw": "{\n\"technologies\":[1]\n}"
 				},
 				"url": {
-					"raw": "localhost:8080/mentors/search",
+					"raw": "localhost:8083/mentors/search",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8083",
 					"path": [
 						"mentors",
 						"search"
