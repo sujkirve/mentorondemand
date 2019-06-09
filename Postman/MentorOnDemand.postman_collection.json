@@ -33,6 +33,114 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "trainings",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"sujitkirve@gmail.com\",\n\t\"firstname\":\"Sujit\",\n\t\"lastname\":\"Kirve\",\n\t\"password\":\"abc\"\n\t\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/technologies/2/trainings?searchStartDate=2019-06-01&searchEndDate=2019-06-30",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"technologies",
+						"2",
+						"trainings"
+					],
+					"query": [
+						{
+							"key": "searchStartDate",
+							"value": "2019-06-01"
+						},
+						{
+							"key": "searchEndDate",
+							"value": "2019-06-30"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mentors-profile",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\":\"sujitkirve@gmail.com\",\n\t\"firstname\":\"Sujit\",\n\t\"lastname\":\"Kirve\",\n\t\"password\":\"abc\"\n\t\n}"
+				},
+				"url": {
+					"raw": "localhost:8083/mentors/1/profile",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"mentors",
+						"1",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "mentors-search",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"technologies\":[2]\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/mentors/search",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"mentors",
+						"search"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
