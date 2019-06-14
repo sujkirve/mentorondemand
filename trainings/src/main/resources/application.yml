@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: trainings-client
+  datasource:
+    url: jdbc:mysql://localhost:3306/simplilearn
+    username: root
+    password:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialet: org.hibernate.dialect.MySQL5Dialect   
+server:
+  port: 0
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+  instance:
+    preferIpAddress: true

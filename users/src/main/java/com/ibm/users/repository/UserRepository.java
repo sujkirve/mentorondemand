@@ -10,4 +10,6 @@ import com.ibm.users.model.User;
 public interface UserRepository extends JpaRepository<User, Long> {
  
  User findByEmail(String email);
+ 
+ User findById(int id);
 }

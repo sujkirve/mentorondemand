@@ -8,6 +8,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.client.RestTemplate;
 
 import com.ibm.mentors.mapper.MentorSkillsMapper;
 import com.ibm.mentors.model.MentorDetails;
@@ -19,6 +20,9 @@ import com.ibm.mentors.model.User;
 import com.ibm.mentors.repository.MentorRepository;
 import com.ibm.mentors.repository.MentorSkillsRepository;
 import com.ibm.mentors.repository.UserRepository;
+import com.netflix.appinfo.InstanceInfo;
+import com.netflix.discovery.EurekaClient;
+import com.netflix.discovery.shared.Application;
 
 @Service("userService")
 public class MentorServiceImpl implements MentorService {
@@ -35,12 +39,25 @@ public class MentorServiceImpl implements MentorService {
 	@Autowired
 	private MentorSkillsMapper mentorSkillsMapper;
 	
+    @Autowired
+    private RestTemplate restTemplate;
+    @Autowired
+    private EurekaClient eurekaClient;
+    
+    
 	@Override
 	public MentorProfileDetails getMentorDetails(int mentorId) {
 		
 		MentorProfileDetails mentorProfileDetails = new MentorProfileDetails();
 		
-		User mentor = userRepository.findById(mentorId);
+		Application application = eurekaClient.getApplication("users-client");
+        InstanceInfo instanceInfo = application.getInstances().get(0);
+        String url = "http://" + instanceInfo.getIPAddr() + ":" + instanceInfo.getPort() + "/" + "users/" + mentorId;
+        System.out.println("URL" + url);
+        User mentor = restTemplate.getForObject(url, User.class);
+        
+		
+		//User mentor = userRepository.findById(mentorId);
 		
 		MentorDetails  mentorDetails = mentorRepository.findByMentorId(mentorId);
 		

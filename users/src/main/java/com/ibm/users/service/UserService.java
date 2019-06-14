@@ -12,4 +12,6 @@ public interface UserService {
 	public User saveUser(User user);
 	
 	public LoginResponse validateUser(LoginRequest loginRequest) throws ApiException;
+
+	User findUserById(int id);
 }
