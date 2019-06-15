@@ -4,6 +4,7 @@ public class MentorSkillsResponse {
 
 	int mentorId;
 	String technology;
+	int technologyId;
 	double yearofExperience;
 	/**
 	 * @return the mentorId
@@ -41,13 +42,26 @@ public class MentorSkillsResponse {
 	public void setYearofExperience(double yearofExperience) {
 		this.yearofExperience = yearofExperience;
 	}
+	
+	/**
+	 * @return the technologyId
+	 */
+	public int getTechnologyId() {
+		return technologyId;
+	}
+	/**
+	 * @param technologyId the technologyId to set
+	 */
+	public void setTechnologyId(int technologyId) {
+		this.technologyId = technologyId;
+	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "MentorSkillsResponse [mentorId=" + mentorId + ", technology=" + technology + ", yearofExperience="
-				+ yearofExperience + "]";
+		return "MentorSkillsResponse [mentorId=" + mentorId + ", technology=" + technology + ", technologyId="
+				+ technologyId + ", yearofExperience=" + yearofExperience + "]";
 	}
 	
 	

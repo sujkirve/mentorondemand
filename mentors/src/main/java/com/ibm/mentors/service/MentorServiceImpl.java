@@ -19,12 +19,11 @@ import com.ibm.mentors.model.MentorSkills;
 import com.ibm.mentors.model.User;
 import com.ibm.mentors.repository.MentorRepository;
 import com.ibm.mentors.repository.MentorSkillsRepository;
-import com.ibm.mentors.repository.UserRepository;
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 import com.netflix.discovery.shared.Application;
 
-@Service("userService")
+@Service("mentorService")
 public class MentorServiceImpl implements MentorService {
 
 	@Autowired
@@ -32,9 +31,6 @@ public class MentorServiceImpl implements MentorService {
 
 	@Autowired
 	private MentorSkillsRepository mentorSkillsRepository;
-	
-	@Autowired
-	private UserRepository userRepository;
 	
 	@Autowired
 	private MentorSkillsMapper mentorSkillsMapper;
@@ -50,7 +46,7 @@ public class MentorServiceImpl implements MentorService {
 		
 		MentorProfileDetails mentorProfileDetails = new MentorProfileDetails();
 		
-		Application application = eurekaClient.getApplication("users-client");
+		Application application = eurekaClient.getApplication("users-api");
         InstanceInfo instanceInfo = application.getInstances().get(0);
         String url = "http://" + instanceInfo.getIPAddr() + ":" + instanceInfo.getPort() + "/" + "users/" + mentorId;
         System.out.println("URL" + url);

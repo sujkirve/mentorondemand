@@ -17,6 +17,7 @@ public class MentorSkillsMapper {
 			MentorSkillsResponse mentorSkillsResponse = new MentorSkillsResponse();
 			mentorSkillsResponse.setMentorId(mentorSkill.getMentor().getId());
 			mentorSkillsResponse.setTechnology(mentorSkill.getTechnology().getName());
+			mentorSkillsResponse.setTechnologyId(mentorSkill.getTechnology().getId());
 			mentorSkillsResponse.setYearofExperience(mentorSkill.getYearofExperience());
 			mentorSkillsList.add(mentorSkillsResponse);
 		}
