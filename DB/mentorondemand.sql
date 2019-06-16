@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 09, 2019 at 04:24 PM
+-- Generation Time: Jun 16, 2019 at 02:45 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -37,8 +37,8 @@ CREATE TABLE `hibernate_sequence` (
 --
 
 INSERT INTO `hibernate_sequence` (`next_val`) VALUES
-(4),
-(4);
+(5),
+(5);
 
 -- --------------------------------------------------------
 
@@ -109,7 +109,9 @@ CREATE TABLE `payments` (
   `candidate_id` int(11) NOT NULL,
   `mentor_id` int(11) NOT NULL,
   `amount` int(11) NOT NULL,
-  `training_id` int(11) NOT NULL
+  `training_id` int(11) NOT NULL,
+  `transactionsDate` datetime NOT NULL,
+  `transactionsid` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -212,7 +214,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `firstname`, `lastname`, `email`, `password`, `active`, `is_mentor`) VALUES
 (1, 'Sujit', 'Kirve', 'sujitkirve@gmail.com', '$2a$10$RLvEeUb1FDGLGw8oJfio8u4I6tz9sdZJeZLd7iw15YOSC2P5S7tFW', 1, 1),
 (2, 'Sumit', 'Kirve', 'sumitkirve@gmail.com', '$2a$10$VcoPnJ.JJMbZBZTAh6wGS.C2KAFP4buS.FM.MldI3Dzyb2DQuWr0e', 1, 1),
-(3, 'Sunil', 'Kirve', 'sunilkirve@gmail.com', '$2a$10$ma40RVjm5r9ia4BAXOH5juBsNCD4hSUI2dWIs/WFH4B3zETtrI.WS', 1, 0);
+(3, 'Sunil', 'Kirve', 'sunilkirve@gmail.com', '$2a$10$ma40RVjm5r9ia4BAXOH5juBsNCD4hSUI2dWIs/WFH4B3zETtrI.WS', 1, 0),
+(4, 'john', 'Doe', 'john@gmail.com', '$2a$10$iK6Hi8B.W0oBosRtBu7hz.6m9ShIaADzhGLZO6L0Hkr4s/ibly0NC', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -232,7 +235,8 @@ CREATE TABLE `user_role` (
 INSERT INTO `user_role` (`user_id`, `role_id`) VALUES
 (1, 1),
 (2, 1),
-(3, 1);
+(3, 1),
+(4, 1);
 
 --
 -- Indexes for dumped tables
@@ -352,7 +356,7 @@ ALTER TABLE `trainings`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
