@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ibm.mentors.model.MentorBlockUserResponse;
 import com.ibm.mentors.model.MentorProfileDetails;
 import com.ibm.mentors.model.MentorSearchRequest;
 import com.ibm.mentors.model.MentorSearchResponse;
@@ -31,6 +32,13 @@ public class MentorController {
 		//Validate Request
 		
 		return mentorService.searchMentorsByTechnology(mentorSearchRequest);
+	}
+	
+	@RequestMapping(value = { "/mentors/{mentorId}/users/{userId}/block" }, method = RequestMethod.POST)
+	public @ResponseBody MentorBlockUserResponse blockUserForMentor(@PathVariable  int mentorId, @PathVariable  int userId) {
+
+		//Validate Request
+		return mentorService.blockUserForMentor(mentorId, userId);
 	}
 
 }

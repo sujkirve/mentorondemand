@@ -11,12 +11,15 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 
 import com.ibm.mentors.mapper.MentorSkillsMapper;
+import com.ibm.mentors.model.MentorBlockUserResponse;
+import com.ibm.mentors.model.MentorBlockUsers;
 import com.ibm.mentors.model.MentorDetails;
 import com.ibm.mentors.model.MentorProfileDetails;
 import com.ibm.mentors.model.MentorSearchRequest;
 import com.ibm.mentors.model.MentorSearchResponse;
 import com.ibm.mentors.model.MentorSkills;
 import com.ibm.mentors.model.User;
+import com.ibm.mentors.repository.MentorBlockUserRepository;
 import com.ibm.mentors.repository.MentorRepository;
 import com.ibm.mentors.repository.MentorSkillsRepository;
 import com.netflix.appinfo.InstanceInfo;
@@ -34,6 +37,9 @@ public class MentorServiceImpl implements MentorService {
 	
 	@Autowired
 	private MentorSkillsMapper mentorSkillsMapper;
+	
+	@Autowired
+	private MentorBlockUserRepository mentorBlockUserRepository;
 	
     @Autowired
     private RestTemplate restTemplate;
@@ -105,4 +111,34 @@ public class MentorServiceImpl implements MentorService {
 		return response;
 	}
 
+	
+	@Override
+	public MentorBlockUserResponse blockUserForMentor(int mentorId, int userId) {
+
+		MentorBlockUserResponse response = new MentorBlockUserResponse(); 
+
+		Application application = eurekaClient.getApplication("users-api");
+        InstanceInfo instanceInfo = application.getInstances().get(0);
+        //Mentor
+        String url = "http://" + instanceInfo.getIPAddr() + ":" + instanceInfo.getPort() + "/" + "users/" + mentorId;
+        System.out.println("URL" + url);
+        User mentor = restTemplate.getForObject(url, User.class);
+        
+        //User
+        String user_url = "http://" + instanceInfo.getIPAddr() + ":" + instanceInfo.getPort() + "/" + "users/" + userId;
+        System.out.println("URL" + user_url);
+        User users = restTemplate.getForObject(user_url, User.class);
+		
+        MentorBlockUsers mentorBlockUsers = new MentorBlockUsers();
+        mentorBlockUsers.setMentor(mentor);
+        mentorBlockUsers.setUser(users);
+        mentorBlockUsers.setBlocked(true);
+        mentorBlockUserRepository.save(mentorBlockUsers);
+        
+        response.setBlocked(true);
+        return response;
+        
+        
+        
+	}
 }
