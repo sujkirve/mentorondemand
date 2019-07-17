@@ -8,9 +8,20 @@ import App from './App';
 
 import 'typeface-roboto';
 
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: { main: '#9c27b0' },
+    secondary: { main: '#ff4081' }
+  }
+});
+
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <MuiThemeProvider>
+      <App />
+    </MuiThemeProvider>
   </BrowserRouter>,
   document.getElementById('root')
 );

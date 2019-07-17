@@ -82,6 +82,6 @@
   width: 49%;
 }
 
-.MuiAppBar-colorPrimary{
-  background-color: #3f51b5;
+.block-user-btn {
+  float: right;
 }

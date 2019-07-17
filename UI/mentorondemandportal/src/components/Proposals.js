@@ -54,6 +54,33 @@ export default class Proposals extends React.Component {
       });
   };
 
+  blockUser = (proposal) => {
+    fetch(`http://localhost:3001/mentors/${proposal.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        ...proposal,
+        blockedUsers: proposal.user.id
+      })
+    })
+      .then(resp => resp.json())
+      .then(proposal => {
+        const acceptedProposalIndex = this.state.proposals.findIndex(
+          proposalObj => proposalObj.id === proposal.id
+        );
+
+        this.setState({
+          proposals: [
+            ...this.state.proposals.slice(0, acceptedProposalIndex),
+            proposal,
+            ...this.state.proposals.slice(acceptedProposalIndex + 1)
+          ]
+        });
+      });
+  }
+
   render() {
     const { role } = this.props.userProfile;
     return (
@@ -96,6 +123,16 @@ export default class Proposals extends React.Component {
                       Accepted
                     </Typography>
                   )}
+
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    className="block-user-btn"
+                    onClick={() => this.blockUser(proposal)}
+                  >
+                    Block
+                  </Button>
                 </div>
               );
             } else {
